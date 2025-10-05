@@ -1,9 +1,12 @@
-
 import React from 'react';
 import EventCard from '../components/EventCard';
-import { EVENTS } from '../data/mockData';
+import type { Event } from '../types';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  events: Event[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({ events }) => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center mb-12">
@@ -16,7 +19,7 @@ const HomePage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {EVENTS.map(event => (
+        {events.map(event => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>

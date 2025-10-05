@@ -5,7 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import type { UserRole } from '../types';
 
 interface PrivateRouteProps {
-  children: JSX.Element;
+  // FIX: Replaced JSX.Element with React.ReactElement to resolve "Cannot find namespace 'JSX'" error.
+  children: React.ReactElement;
   allowedRoles: UserRole[];
 }
 

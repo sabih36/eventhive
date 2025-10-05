@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { TicketIcon, UsersIcon } from './Icons';
+import { TicketIcon, UsersIcon, PlusCircleIcon } from './Icons';
 import type { User } from '../types';
 import { UserRole } from '../types';
 
@@ -28,12 +27,20 @@ const Header: React.FC = () => {
               <div className="ml-10 flex items-baseline space-x-4">
                 <NavLink to="/" className={navLinkClasses}>Events</NavLink>
                 {user?.role === UserRole.ORGANIZER && (
-                  <NavLink to="/dashboard" className={navLinkClasses}>
-                    <div className="flex items-center">
-                      <UsersIcon className="w-4 h-4 mr-1" />
-                      Dashboard
-                    </div>
-                  </NavLink>
+                  <>
+                    <NavLink to="/dashboard" className={navLinkClasses}>
+                      <div className="flex items-center">
+                        <UsersIcon className="w-4 h-4 mr-1" />
+                        Dashboard
+                      </div>
+                    </NavLink>
+                    <NavLink to="/create-event" className={navLinkClasses}>
+                      <div className="flex items-center">
+                        <PlusCircleIcon className="w-4 h-4 mr-1" />
+                        Create Event
+                      </div>
+                    </NavLink>
+                  </>
                 )}
               </div>
             </div>
@@ -86,7 +93,10 @@ const Header: React.FC = () => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
              <NavLink to="/" className={navLinkClasses} end>Events</NavLink>
               {user?.role === UserRole.ORGANIZER && (
-                <NavLink to="/dashboard" className={navLinkClasses}>Dashboard</NavLink>
+                <>
+                  <NavLink to="/dashboard" className={navLinkClasses}>Dashboard</NavLink>
+                  <NavLink to="/create-event" className={navLinkClasses}>Create Event</NavLink>
+                </>
               )}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-700">

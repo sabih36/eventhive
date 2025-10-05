@@ -1,18 +1,17 @@
-
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { EVENTS } from '../data/mockData';
-import type { Booking } from '../types';
+import type { Booking, Event } from '../types';
 import { UsersIcon } from '../components/Icons';
 
 interface DashboardPageProps {
   bookings: Booking[];
+  events: Event[];
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ bookings }) => {
+const DashboardPage: React.FC<DashboardPageProps> = ({ bookings, events }) => {
   const { user } = useAuth();
   
-  const organizerEvents = EVENTS.filter(event => event.organizerId === user?.id);
+  const organizerEvents = events.filter(event => event.organizerId === user?.id);
   const organizerBookings = bookings.filter(booking => organizerEvents.some(event => event.id === booking.eventId));
   
   return (

@@ -1,24 +1,24 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { EVENTS } from '../data/mockData';
 import { useAuth } from '../context/AuthContext';
 import { QRCodeCanvas } from 'qrcode.react';
 import { CalendarIcon, MapPinIcon, DollarSignIcon, TicketIcon, QrCodeIcon } from '../components/Icons';
-import type { Booking } from '../types';
+import type { Booking, Event } from '../types';
 
 interface EventPageProps {
   bookings: Booking[];
   addBooking: (booking: Omit<Booking, 'id' | 'timestamp'>) => Booking;
+  events: Event[];
 }
 
-const EventPage: React.FC<EventPageProps> = ({ bookings, addBooking }) => {
+const EventPage: React.FC<EventPageProps> = ({ bookings, addBooking, events }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [ticketCount, setTicketCount] = useState(1);
   const [bookedTicketInfo, setBookedTicketInfo] = useState<Booking | null>(null);
 
-  const event = useMemo(() => EVENTS.find(e => e.id === id), [id]);
+  const event = useMemo(() => events.find(e => e.id === id), [id, events]);
 
   const ticketsSold = useMemo(() => {
     return bookings
